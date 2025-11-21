@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.0.xsd">
+
+    <!-- ChangeSet 1: Create Demo Table -->
+    <changeSet id="1" author="HITANIKET">
+        <comment>Create a demo table for testing</comment>
+        <createTable tableName="DEMO_USERS">
+            <column name="ID" type="NUMBER(10)" autoIncrement="true">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+            <column name="USERNAME" type="VARCHAR2(50)">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="EMAIL" type="VARCHAR2(100)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="CREATED_DATE" type="DATE" defaultValueDate="SYSDATE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="STATUS" type="VARCHAR2(20)" defaultValue="ACTIVE">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+
+    <!-- ChangeSet 2: Insert Sample Data -->
+    <changeSet id="2" author="HITANIKET">
+        <comment>Insert sample data into demo table</comment>
+        <insert tableName="DEMO_USERS">
+            <column name="USERNAME" value="admin"/>
+            <column name="EMAIL" value="admin@example.com"/>
+            <column name="STATUS" value="ACTIVE"/>
+        </insert>
+        <insert tableName="DEMO_USERS">
+            <column name="USERNAME" value="testuser"/>
+            <column name="EMAIL" value="test@example.com"/>
+            <column name="STATUS" value="ACTIVE"/>
+        </insert>
+    </changeSet>
+
+    <!-- ChangeSet 3: Add Index -->
+    <changeSet id="3" author="HITANIKET">
+        <comment>Add index on email column for better performance</comment>
+        <createIndex indexName="IDX_DEMO_USERS_EMAIL" tableName="DEMO_USERS">
+            <column name="EMAIL"/>
+        </createIndex>
+    </changeSet>
+
+    <!-- ChangeSet 4: Add New Column -->
+    <changeSet id="4" author="HITANIKET">
+        <comment>Add phone number column</comment>
+        <addColumn tableName="DEMO_USERS">
+            <column name="PHONE_NUMBER" type="VARCHAR2(15)"/>
+        </addColumn>
+    </changeSet>
+
+</databaseChangeLog>
+
+
+
